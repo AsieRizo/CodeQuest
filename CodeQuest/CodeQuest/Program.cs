@@ -22,10 +22,11 @@ public class Program
 
         //Chapter 1: "The way of the learning mage" is initiated"
         //Text fragment constants assigment
-        const string CH1_TEXT_MENU = "========CHAPTER1 MENU=======";
-        const string CH1_TEXT_MAGENAME = " 👋 Welcome to CodeQuest,you have selected Chapter 1: The way of the learning mage🧙‍," +
-            "please select the name for your character: ";
-        const string CH1_TEXT_START = "Now we are going to start your trainment for 5 days 💪";
+        const string CH1_TEXT_MENU = "========CHAPTER 1 MENU=======";
+        const string CH1_TEXT_WELCOME = " 👋 Welcome to CodeQuest,you have selected Chapter 1: The way of the learning mage🧙‍.";
+        const string CH1_TEXT_MAGENAME= "Please select the name for your character: ";
+        const string CH1_ERROR_MAGENAME = "Your mage must have a name, please try again";
+        const string CH1_TEXT_START = "Now we are going to start your training for 5 days 💪";
 
         //Complete message: Day {day} --> {namemage} has meditated {hours} hours and now your power is {points}
         const string CH1_MSG_STATSPROGRESSION1 = " --> has meditated ";
@@ -36,10 +37,10 @@ public class Program
         //Messages by evaluation's mark
         const string CH1_MSG_LEVELUP = " has leveled up to level ";
         const string CH1_MSG_EVALUATION_NOTPASS = "😢 You repeat 2nd convocatory";
-        const string CH1_MSG_EVALUATION_PASS_ALMOST = "😑 You still confuse the wand with the spurn";
+        const string CH1_MSG_EVALUATION_PASS_ALMOST = "😑 You still confuse the wand with the spoon";
         const string CH1_MSG_EVALUATION_PASS_ENOUGH = "😊 You are a Magical Breeze caster";
         const string CH1_MSG_EVALUATION_PASS_GOOD = " 🐲 WOW. You can cast dragons without burning the lab";
-        const string CH1_MSG_EVALUATION_PASS_MASTER = "🤩 You have acomplished the Master of Arcanes rank";
+        const string CH1_MSG_EVALUATION_PASS_MASTER = "🤩 You have accomplished the Master of Arcanes rank";
 
         //Ranks
         const string CH1_TEXT_RANK_OBTAIN = "You obtain the rank: ";
@@ -58,22 +59,22 @@ public class Program
         //Game Explain
         const string CH2_TEXT_EXPLAIN_ENTER = "Your mage has entered into the Dungeon of the Dragon Raymond the Powerful in search of its treasure 🐲💎.";
         const string CH2_TEXT_EXPLAIN_DOORS = " In front of you there are 3 doors 🚪🚪🚪, each one is protected with a number between 1 and 5.";
-        const string CH2_TEXT_EXPLAIN_GUESS = " In order to overcome the room, you must guess the doors code in less than 3 tryes. 🤔";
+        const string CH2_TEXT_EXPLAIN_GUESS = " In order to overcome the room, you must guess the door's code in less than 3 tries. 🤔";
         const string CH2_TEXT_EXPLAIN_CONSEQUENCE = " Otherwise, the dragon will detect your presence and you will lose the game 🐲😤😭.";
         const string CH2_TEXT_EXPLAIN_REPEAT = "You must repeat this process with 3 different doors to get the treasure";
 
         //Game interactions
         const string CH2_TEXT_SELECT = "Select a number in order to open the door (if you lose the door code does not change): ";
         const string CH2_MSG_WARNING = "You have not guessed  the code, you have ";
-        const string CH2_MSG_CATCH = "The dregon 🐲😤 has detected your presence and it has expelled you from the dungeon";
+        const string CH2_MSG_CATCH = "The dragon 🐲😤 has detected your presence and it has expelled you from the dungeon";
         const string CH2_MSG_RESPECT = "The dragon 🐲 👌respects you. You have unlocked the next level";
         const string CH2_MSG_REWARD = "You have unlocked the final level. You can keep the dragons treasure 🐲💎 ";
         const string CH2_MSG_ERROR = "❎ERROR❎: Your input text format is not valid (1,2,3,4 or 5). Please try again ";
 
-        //Chaptewr 3
+        //Chapter 3
         // Welcome
-        const string CH3_TEXT_MENU = "========CHAPTER3 MENU=======";
-        const string CH3_TEXT_WELCOME = " 👋 Welcome to CodeQuest,you have selected Chapter 3: Lot the swag 🪎";
+        const string CH3_TEXT_MENU = "========CHAPTER 3 MENU=======";
+        const string CH3_TEXT_WELCOME = " 👋 Welcome to CodeQuest,you have selected Chapter 3: Loot the swag 🪎";
         const string CH3_TEXT_START = "Now it is time to mine⛏️. ";
         const string CH3_TEXT_EXPLAIN_BITS = " Whenever you do an excavation you gain 5 to 50 bits 🪙. Or maybe nothing 🙂 (20% chance of being disgraceful)";
         const string CH3_TEXT_EXCAVATION = "You can only do 5 excavations in total.";
@@ -97,15 +98,15 @@ public class Program
         const int CH3_MIN_EXCAVATION = 5;
         const int CH3_MAX_EXCAVATION = 51;
 
-        // Valor centinella: -1 NO és una opció vàlida.
-        // El necessitem perquè el compilador no garanteix que 'option' s'assigni
-        // dins del try (pot saltar una excepció abans d'arribar a l'assignació).
+        // Sentinel value: -1 is not a valid value.
+        // We need it because the compilator does not grant that the option is assigned
+        // inside the try (it can appear an exception before arriving to the assignation).
         int option = -1;
         bool isValid;
 
         do
         {
-            isValid = false; // A cada volta suposem que l'entrada NO és vàlida
+            isValid = false; // In every iteration we consider that the input is not valid
 
             Console.WriteLine(MenuTitle);
             Console.WriteLine(MenuOption1);
@@ -116,38 +117,50 @@ public class Program
 
             try
             {
-                // int.Parse pot llançar: FormatException, OverflowException
-                // o ArgumentNullException (si ReadLine retorna null amb Ctrl+Z / Ctrl+D)
+                // int.Parse can gieve: FormatException, OverflowException
+                // or ArgumentNullException (if ReadLine returns null with Ctrl+Z / Ctrl+D)
                 option = int.Parse(Console.ReadLine());
 
-                // Validació de rang: si no es compleix, LLANÇEM nosaltres l'excepció
+                // Rank validation: if it is not accomplishe, we THROW the exception
                 if (option < 0 || option > 3)
                 {
                     throw new ArgumentOutOfRangeException(nameof(option), ErrorRange);
                 }
 
-                // Si arribem aquí no ha saltat cap excepció: entrada vàlida
+                // If we arrive here and none exception has been showed up: valid input
                 isValid = true;
                 Console.WriteLine($"You chose: {option}");
+
+                // CHAPTERS:
+                //Chapter 1: "The way of the learning mage"
                 if (option == 1)
                 {
                     //Local variables
                     string namemage = "";
-                    int day;
                     int points, levelnew, levelreference, hours;
                     var rng = new Random(); // A random number generator
 
                     //Begin
-                    day = 1;
                     points = 0;
-
-                    Console.WriteLine(CH1_TEXT_MENU);
-                    Console.Write(CH1_TEXT_MAGENAME);
-                    namemage = Console.ReadLine();
-                    Console.WriteLine(CH1_TEXT_START);
-
                     levelnew = 1;
                     levelreference = 1;
+
+                    Console.WriteLine(CH1_TEXT_MENU);
+                    Console.WriteLine(CH1_TEXT_WELCOME);
+                    do
+                    {
+                        Console.Write(CH1_TEXT_MAGENAME);
+                        namemage = Console.ReadLine();
+
+                        if (namemage == "")
+                        {
+                            Console.WriteLine(CH1_ERROR_MAGENAME);
+                        }
+
+                    } while (namemage == "");
+
+
+                    Console.WriteLine(CH1_TEXT_START);
 
                     for (int i = 1; i <= 5; i++)
                     { //The mage trains for 5 days straight
@@ -156,7 +169,7 @@ public class Program
                         points = points + rng.Next(MIN_RANDOM, CH1_MAX_RANDOM_POINTS);//The mage gains a random number of ponts between 1 and 10
                         levelnew = 1 + points / 10;// The level of the mage increases for each 10 points
 
-                        Console.WriteLine($"{day++} {namemage}{CH1_MSG_STATSPROGRESSION1}{hours}{CH1_MSG_STATSPROGRESSION2}{points}{CH1_MSG_STATSPROGRESSION3}");
+                        Console.WriteLine($"{i} {namemage}{CH1_MSG_STATSPROGRESSION1}{hours}{CH1_MSG_STATSPROGRESSION2}{points}{CH1_MSG_STATSPROGRESSION3}");
 
                         //Compares the new level with the level of the day before, is the first one is bigger the mage has leveled up
                         if (levelnew > levelreference)
@@ -201,7 +214,7 @@ public class Program
                     }
                 }
 
-
+                //Chapter 2: The Dungeon ot the Dragon Raymond the Powerful
                 else if (option == 2)
                 {
                     //Variables
@@ -218,10 +231,11 @@ public class Program
                     Console.WriteLine(CH2_TEXT_EXPLAIN_GUESS);
                     Console.WriteLine(CH2_TEXT_EXPLAIN_CONSEQUENCE);
                     Console.WriteLine(CH2_TEXT_EXPLAIN_REPEAT);
+
                     //The game has 3 iterations
                     for (int i = 1; i <= 3; i++)
                     {
-                        tries = CH2_TRIES; //c
+                        tries = CH2_TRIES; 
                         door_code = rng.Next(MIN_RANDOM, CH2_CH3_MAX_RANDOM); //Generates a random door code constatntes
 
                         while (tries > 0) // For each door/iteration you can guess the code as long your do not have 0 tries left
@@ -273,7 +287,8 @@ public class Program
                         }
                     }
                 }
-                 else {
+                //Chapter 3: Loot the mine
+                 else if (option==3) {
                         int bit, bit_total, chance;
                         var rng = new Random(); // A random number generator
 
@@ -289,7 +304,7 @@ public class Program
                         Console.WriteLine(CH3_TEXT_EXCAVATION);
                         Console.WriteLine(CH3_TEXT_START_DEFINITIVE);
 
-                        for (int i = 1; i <= 5; i++) //5 excavations are realized constantes
+                        for (int i = 1; i <= 5; i++) //5 excavations are realized 
                         {
                             chance = rng.Next(MIN_RANDOM, CH2_CH3_MAX_RANDOM); //The program decides if the player will get nothing 
 
